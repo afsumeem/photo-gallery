@@ -14,6 +14,7 @@
     justify-items: center;
     margin: auto;
     width: 100%;
+   
 }
 
 .image-items{
@@ -22,6 +23,7 @@
     max-width: 100%;
     transition: .5s;
     background-color: black;
+    position:relative
     
 }
 .img-div{
@@ -30,7 +32,10 @@
 }
 .image-checkbox{
     visibility: hidden;
-    transition: .5s;
+    /* transition: .5s; */
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .img-div:hover{

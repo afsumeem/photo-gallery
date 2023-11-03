@@ -26,13 +26,13 @@ const Gallery = () => {
                 {imageData.map((image) => (
                   <div key={image.id} className="image-items">
                     <div className="img-div">
-                      <input type="checkbox" className="image-checkbox" />
                       <img
                         src={image.image}
                         className="image"
                         alt="gallery-img"
                       />
                     </div>
+                    <input type="checkbox" className="image-checkbox" />
                   </div>
                 ))}
                 <div>
