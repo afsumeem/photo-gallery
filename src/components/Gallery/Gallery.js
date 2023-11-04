@@ -23,6 +23,22 @@ const Gallery = () => {
       )
     );
   };
+  //
+  const handleFileChange = (event) => {
+    const file = event.target.files;
+    const newFiles = Array.from(file).map((newFile, i) => {
+      const id = imageData.length + 1;
+      const image = URL.createObjectURL(newFile);
+      return { id, image };
+    });
+    setImageData([...imageData, ...newFiles]);
+  };
+
+  //
+  const handleDeleteImages = () => {
+    const updatedImageData = imageData.filter((image) => !image.checked);
+    setImageData(updatedImageData);
+  };
 
   return (
     <div>
@@ -35,6 +51,10 @@ const Gallery = () => {
             {" "}
             {countSelectedImages()} image{countSelectedImages() !== 1 && "s"}{" "}
             selected
+          </div>
+          <div>
+            <h2>Delete Image</h2>
+            <button onClick={handleDeleteImages}>Delete Image</button>
           </div>
           <div className="gallery-container">
             {imageData.length === 0 ? (
@@ -65,7 +85,13 @@ const Gallery = () => {
                   </div>
                 ))}
                 <div>
-                  <h2>add image</h2>
+                  <input
+                    type="file"
+                    name="image"
+                    title="add-image"
+                    onChange={handleFileChange}
+                    multiple
+                  />
                 </div>
               </div>
             )}
