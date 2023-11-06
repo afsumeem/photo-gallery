@@ -1,21 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Griffy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
 
 /* main container style */
 
 body{
     background-color: rgba(0, 0, 0, 0.897);
-    
-    
+    font-family: "Spirax"; 
 }
 
-.container{
-  
-}
+/* gallery title */
+
 .gallery-title{
     color: white;
     text-align: center;
     font-size: 25px;
-    font-family: "Griffy";
 }
 
 .gallery-title h2::after{
@@ -27,6 +24,7 @@ body{
    margin: auto;
    margin-top: 5px;
 }
+
 
 /* image gallery container style */
 
@@ -49,9 +47,7 @@ body{
 }
 
 .selected-img span{
-    color: rgb(255, 255, 255);
     font-size: 25px;
-
 }
 
 /* delete image btn style */
@@ -65,7 +61,7 @@ body{
     box-shadow: 0 0 5px #ff1010;
     height: 50px;
     width: 50px;
-    transition: .5s;
+    transition: .6s;
 }
 
   .delete-img:hover {
@@ -74,7 +70,7 @@ body{
   
 
 .delete-img:disabled{
-cursor: no-drop;
+    cursor: no-drop;
 }
 
 
@@ -97,17 +93,22 @@ cursor: no-drop;
     border: 1px solid rgba(0,0,0,0.3);
     max-width: 100%;
     position:relative; 
+   
 }
 
 .img-div{
     background-color: white;
    transition: .5s;
-   height: 100%
+   height: 100%;
+   transition: transform 2s;
+
 }
 
 .img-div:hover  {
     background: rgba(179, 179, 179, 0.904);
 }
+
+
 
 .img-div:hover img{
     opacity: .5;
@@ -136,6 +137,7 @@ cursor: no-drop;
 .image-items:hover .image-checkbox{
     visibility: visible;
 }
+
 
 .img-div img{
     width: 100%;

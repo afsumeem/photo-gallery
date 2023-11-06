@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./gallery.css";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+// import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { BiTrash } from "react-icons/bi";
 
 const Gallery = () => {
@@ -46,25 +46,36 @@ const Gallery = () => {
     setImageData(updatedImageData);
   };
 
-  //drag and drop fn
-
-  function handleOnDragEnd(result) {
-    if (!result.destination) return;
-
-    const items = Array.from(imageData);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setImageData(items);
-  }
-
   //
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
 
+  //Drag and drop
+
+  const handleImageDragStart = (event, index) => {
+    const { dataTransfer } = event;
+    dataTransfer.setData("text/plain", index.toString());
+  };
+
+  const handleImageDragOver = (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  };
+
+  const handleImageDrop = (event, dropIndex) => {
+    event.preventDefault();
+    const dragIndex = parseInt(event.dataTransfer.getData("text/plain"), 10);
+    if (dragIndex !== dropIndex) {
+      const updatedImages = [...imageData];
+      const [draggedImage] = updatedImages.splice(dragIndex, 1);
+      updatedImages.splice(dropIndex, 0, draggedImage);
+      setImageData(updatedImages);
+    }
+  };
+
   return (
-    <div className="container">
+    <div>
       {/* gallery header */}
       <header className="gallery-title">
         <h2>Photo Gallery</h2>
@@ -75,6 +86,7 @@ const Gallery = () => {
       <main>
         <div className="img-gallery">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
+            {/*  */}
             <div className="selected-img">
               <span> {countSelectedImages()}</span> image
               {countSelectedImages() >= 2 && "s"} {""}
@@ -108,78 +120,65 @@ const Gallery = () => {
             {imageData.length === 0 ? (
               "no image found"
             ) : (
-              <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Droppable droppableId="imageData" direction="horizontal">
-                  {(provided) => (
+              <div className="image-container">
+                {imageData.map((image, i) => {
+                  return (
                     <div
-                      className="image-container"
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
+                      draggable
+                      onDragStart={(event) => handleImageDragStart(event, i)}
+                      onDragOver={(event) => handleImageDragOver(event, i)}
+                      onDrop={(event) => handleImageDrop(event, i)}
+                      key={image.id}
+                      className={`image-items ${
+                        image.checked ? "checked" : ""
+                      }`}
                     >
-                      {imageData.map((image, i) => {
-                        return (
-                          <div
-                            key={image.id}
-                            className={`image-items ${
-                              image.checked ? "checked" : ""
-                            }`}
-                          >
-                            <Draggable draggableId={image?.id} index={i}>
-                              {(provided) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  className="img-div"
-                                  onClick={() => handleCheckboxToggle(image.id)}
-                                >
-                                  <img src={image.image} alt="gallery-img" />
+                      <div
+                        className="img-div"
+                        onClick={() => handleCheckboxToggle(image.id)}
+                      >
+                        {/* gallery image */}
 
-                                  <input
-                                    type="checkbox"
-                                    checked={image.checked}
-                                    className="image-checkbox"
-                                    onChange={() => {}}
-                                  />
-                                </div>
-                              )}
-                            </Draggable>
-                          </div>
-                        );
-                      })}
+                        <img src={image.image} alt="gallery-img" />
 
-                      {/* image upload */}
-                      <div class="file-input-container">
-                        <label htmlFor="image" class="custom-file-upload">
-                          <input
-                            ref={fileInputRef}
-                            type="file"
-                            name="image"
-                            id="image"
-                            title="Add-image"
-                            style={{ display: "none" }}
-                            onChange={handleFileChange}
-                            multiple
-                          />
-                          <img
-                            src="/img/upload.svg"
-                            alt="Uploaded img"
-                            id="preview-image"
-                            class="preview-image"
-                          />
-                          <button
-                            className="add-img-btn"
-                            onClick={handleButtonClick}
-                          >
-                            Add Images
-                          </button>
-                        </label>
+                        {/* checkbox */}
+
+                        <input
+                          type="checkbox"
+                          checked={image.checked}
+                          className="image-checkbox"
+                          onChange={() => {}}
+                        />
                       </div>
-                      {provided.placeholder}
                     </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+                  );
+                })}
+
+                {/* image upload */}
+                <div class="file-input-container">
+                  <label htmlFor="image" class="custom-file-upload">
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      name="image"
+                      id="image"
+                      title="Add-image"
+                      style={{ display: "none" }}
+                      onChange={handleFileChange}
+                      multiple
+                    />
+                    <img
+                      src="/img/upload.svg"
+                      alt="Uploaded img"
+                      id="preview-image"
+                      class="preview-image"
+                    />
+                    <button className="add-img-btn" onClick={handleButtonClick}>
+                      Add Images
+                    </button>
+                  </label>
+                </div>
+              </div>
             )}
           </div>
         </div>
