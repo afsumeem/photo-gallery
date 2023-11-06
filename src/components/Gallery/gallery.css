@@ -4,18 +4,18 @@
 
 body{
     background-color: rgba(0, 0, 0, 0.897);
-    font-family: "Griffy";
+    
     
 }
 
 .container{
-
+  
 }
 .gallery-title{
     color: white;
     text-align: center;
     font-size: 25px;
-   
+    font-family: "Griffy";
 }
 
 .gallery-title h2::after{
@@ -37,6 +37,7 @@ body{
     margin-top: 50px;
     border: 1px solid rgb(44, 44, 44);
     padding: 20px;
+    margin-bottom: 200px;
 }
 
 
@@ -63,9 +64,7 @@ body{
 
 
 .gallery-container{
-    
     margin-top: 30px;
-  
 }
 
 .image-container{
@@ -76,58 +75,103 @@ body{
     justify-items: center;
     margin: auto;
     width: 100%;
-   
 }
 
 .image-items{
     border: 1px solid rgba(0,0,0,0.3);
-    /* box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3); */
     max-width: 100%;
-    transition: .5s;
-    /* background-color: rgba(0, 0, 0, 0.966); */
-    position:relative;
-  
- 
+    position:relative; 
 }
 
 .img-div{
-    background-color: white;
-    /* transition: .5s; */
+    background-color: rgb(247, 247, 247);
+   
 }
 .image-checkbox{
     visibility: hidden;
-    /* transition: .5s; */
     position: absolute;
+    height: 18px;
+    width: 18px;
+    transition: opacity 1s;
     left: 0;
     top: 0;
 }
 
 .image-checkbox:checked{
     visibility: visible;
+  
 }
 
 
-.img-div:hover img {
-    background-color: rgba(0, 0, 0, 0.308);
-  }
+.img-div:hover .image {
+    background: rgba(0, 0, 0, 0.308);
+}
 
-
-
-  .image-items.checked .img-div img {
+.image-items.checked .img-div img {
     opacity: 0.5;
-  }
+}
 
 .image-items:hover .image-checkbox{
     visibility: visible;
-
 }
+
+
 .image{
     overflow: hidden;
     width: 100%;
+    height:100%;
     margin: 0;
+    transition: .4s;
+    padding-bottom: 0;
+}
+
+.image img{
+    margin: 0;
+    padding: 0;
 }
 
 .image-container .image-items:nth-child(1) {
     grid-column: span 3;
     grid-row: span 3;
-    }
+}
+
+  
+  
+  /* Style for input file container */
+
+
+.file-input-container {
+    border: 1px dashed black;
+    position: relative;
+    background-color: #ffffff; 
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+  
+  
+  /* Style for the preview image */
+  .preview-image {
+    width: 40px; 
+    height: 40px; 
+    margin: auto;
+    display: block;
+    margin-bottom: 10px; 
+    cursor: pointer;
+  }
+
+  .add-img-btn{
+    border: none;
+    font-weight: 700;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+    background-color: white;
+    margin-bottom: 10px;
+  }
+  

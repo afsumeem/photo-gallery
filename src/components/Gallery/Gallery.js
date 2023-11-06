@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./gallery.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { BiTrash } from "react-icons/bi";
 
 const Gallery = () => {
   const [imageData, setImageData] = useState([]);
-
+  const fileInputRef = useRef(null);
   // fetch image data
 
   useEffect(() => {
@@ -59,6 +59,9 @@ const Gallery = () => {
   }
 
   //
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
 
   return (
     <div className="container">
@@ -73,12 +76,14 @@ const Gallery = () => {
         <div className="img-gallery">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div className="selected-img">
-              <span> {countSelectedImages()}</span> images{" "}
-              {countSelectedImages() !== 1 && "s"}
+              <span> {countSelectedImages()}</span> image
+              {countSelectedImages() >= 2 && "s"} {""}
               selected
             </div>
+
+            {/* delete image */}
             <div className="delete-img">
-              <BiTrash title="Delete " onClick={handleDeleteImages} />
+              <BiTrash title="Delete Image" onClick={handleDeleteImages} />
             </div>
           </div>
 
@@ -132,14 +137,31 @@ const Gallery = () => {
                       })}
 
                       {/* image upload */}
-                      <div>
-                        <input
-                          type="file"
-                          name="image"
-                          title="add-image"
-                          onChange={handleFileChange}
-                          multiple
-                        />
+                      <div class="file-input-container">
+                        <label htmlFor="image" class="custom-file-upload">
+                          <input
+                            ref={fileInputRef}
+                            type="file"
+                            name="image"
+                            id="image"
+                            title="Add-image"
+                            style={{ display: "none" }}
+                            onChange={handleFileChange}
+                            multiple
+                          />
+                          <img
+                            src="/img/upload.svg"
+                            alt="Uploaded img"
+                            id="preview-image"
+                            class="preview-image"
+                          />
+                          <button
+                            className="add-img-btn"
+                            onClick={handleButtonClick}
+                          >
+                            Add Images
+                          </button>
+                        </label>
                       </div>
                       {provided.placeholder}
                     </div>
@@ -150,8 +172,6 @@ const Gallery = () => {
           </div>
         </div>
       </main>
-
-      <div></div>
     </div>
   );
 };
