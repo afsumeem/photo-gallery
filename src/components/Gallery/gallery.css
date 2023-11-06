@@ -31,11 +31,31 @@ body{
 /* image gallery container style */
 
 .img-gallery{
-    width: 60%;
+    width: 65%;
     display: block;
     margin: auto;
     margin-top: 50px;
+    border: 1px solid rgb(44, 44, 44);
+    padding: 20px;
 }
+
+
+.selected-img{
+    color: white;
+    
+}
+
+.selected-img span{
+    color: rgb(160, 139, 255);
+    font-size: 25px;
+    font-weight: 600;
+}
+
+/* delete image btn style */
+.delete-img{
+    
+}
+
 
 
 .gallery-container{

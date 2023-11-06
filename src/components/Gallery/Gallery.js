@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./gallery.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { BiTrash } from "react-icons/bi";
 
 const Gallery = () => {
   const [imageData, setImageData] = useState([]);
@@ -64,13 +65,15 @@ const Gallery = () => {
 
       <main>
         <div className="img-gallery">
-          <div className="">
-            <div style={{ textAlign: "center" }}>
-              {countSelectedImages()} image{countSelectedImages() !== 1 && "s"}
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div className="selected-img">
+              <span> {countSelectedImages()}</span> image{" "}
+              {countSelectedImages() !== 1 && "s"}
               selected
             </div>
-            <div>
+            <div className="delete-img">
               <button onClick={handleDeleteImages}>Delete Image</button>
+              <BiTrash />
             </div>
           </div>
 
