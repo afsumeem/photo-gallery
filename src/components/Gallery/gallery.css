@@ -40,20 +40,24 @@ body{
 }
 
 
+/* selected img section style */
+
 .selected-img{
     color: white;
     
 }
 
 .selected-img span{
-    color: rgb(160, 139, 255);
+    color: rgb(255, 255, 255);
     font-size: 25px;
-    font-weight: 600;
+
 }
 
 /* delete image btn style */
 .delete-img{
-    
+    color: red;
+    cursor: pointer;
+    font-size: 30px;
 }
 
 

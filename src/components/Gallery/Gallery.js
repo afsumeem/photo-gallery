@@ -6,6 +6,8 @@ import { BiTrash } from "react-icons/bi";
 const Gallery = () => {
   const [imageData, setImageData] = useState([]);
 
+  // fetch image data
+
   useEffect(() => {
     const url = "/data.json";
     fetch(url)
@@ -13,11 +15,12 @@ const Gallery = () => {
       .then((data) => setImageData(data));
   }, []);
 
-  //
+  // count selected image fn
   const countSelectedImages = () => {
     return imageData.filter((image) => image.checked).length;
   };
-  //
+
+  //toggle checkbox for select image
   const handleCheckboxToggle = (id) => {
     setImageData((prevImageData) =>
       prevImageData.map((image) =>
@@ -25,7 +28,8 @@ const Gallery = () => {
       )
     );
   };
-  //
+
+  //upload image
   const handleFileChange = (event) => {
     const file = event.target.files;
     const newFiles = Array.from(file).map((newFile, i) => {
@@ -36,13 +40,13 @@ const Gallery = () => {
     setImageData([...imageData, ...newFiles]);
   };
 
-  //
+  // delete image fn
   const handleDeleteImages = () => {
     const updatedImageData = imageData.filter((image) => !image.checked);
     setImageData(updatedImageData);
   };
 
-  //
+  //drag and drop fn
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -53,6 +57,8 @@ const Gallery = () => {
 
     setImageData(items);
   }
+
+  //
 
   return (
     <div className="container">
@@ -67,13 +73,12 @@ const Gallery = () => {
         <div className="img-gallery">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div className="selected-img">
-              <span> {countSelectedImages()}</span> image{" "}
+              <span> {countSelectedImages()}</span> images{" "}
               {countSelectedImages() !== 1 && "s"}
               selected
             </div>
             <div className="delete-img">
-              <button onClick={handleDeleteImages}>Delete Image</button>
-              <BiTrash />
+              <BiTrash title="Delete " onClick={handleDeleteImages} />
             </div>
           </div>
 
