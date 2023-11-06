@@ -59,10 +59,15 @@ body{
     color: red;
     cursor: pointer;
     font-size: 30px;
+    background-color: transparent;
+    border: none;
+}
+.delete-img:disabled{
+cursor: no-drop;
 }
 
 
-
+/* gallery container style */
 .gallery-container{
     margin-top: 30px;
 }
@@ -86,20 +91,15 @@ body{
 .img-div{
     background-color: white;
    transition: .5s;
+   height: 100%
 }
+
 .img-div:hover  {
-    background: rgba(211, 211, 211, 0.904);
+    background: rgba(179, 179, 179, 0.904);
 }
 
 .img-div:hover img{
-    opacity: .4;
-}
-
-.img-div.no-hover:hover {
-    background-color: transparent;
-}
-.img-div.no-hover:hover img {
-    opacity: 1;
+    opacity: .5;
 }
 
 

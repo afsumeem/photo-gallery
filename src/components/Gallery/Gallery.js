@@ -82,9 +82,25 @@ const Gallery = () => {
             </div>
 
             {/* delete image */}
-            <div className="delete-img">
-              <BiTrash title="Delete Image" onClick={handleDeleteImages} />
-            </div>
+
+            {countSelectedImages() <= 0 ? (
+              <button
+                className="delete-img"
+                onClick={handleDeleteImages}
+                title="Delete Image"
+                disabled
+              >
+                <BiTrash />
+              </button>
+            ) : (
+              <button
+                className="delete-img"
+                onClick={handleDeleteImages}
+                title="Delete Image"
+              >
+                <BiTrash />
+              </button>
+            )}
           </div>
 
           {/* gallery container */}
