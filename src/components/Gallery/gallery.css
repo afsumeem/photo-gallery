@@ -84,9 +84,25 @@ body{
 }
 
 .img-div{
-    background-color: rgb(247, 247, 247);
-   
+    background-color: white;
+   transition: .5s;
 }
+.img-div:hover  {
+    background: rgba(211, 211, 211, 0.904);
+}
+
+.img-div:hover img{
+    opacity: .4;
+}
+
+.img-div.no-hover:hover {
+    background-color: transparent;
+}
+.img-div.no-hover:hover img {
+    opacity: 1;
+}
+
+
 .image-checkbox{
     visibility: hidden;
     position: absolute;
@@ -102,11 +118,6 @@ body{
   
 }
 
-
-.img-div:hover .image {
-    background: rgba(0, 0, 0, 0.308);
-}
-
 .image-items.checked .img-div img {
     opacity: 0.5;
 }
@@ -115,20 +126,12 @@ body{
     visibility: visible;
 }
 
-
-.image{
-    overflow: hidden;
+.img-div img{
     width: 100%;
     height:100%;
-    margin: 0;
     transition: .4s;
-    padding-bottom: 0;
 }
 
-.image img{
-    margin: 0;
-    padding: 0;
-}
 
 .image-container .image-items:nth-child(1) {
     grid-column: span 3;

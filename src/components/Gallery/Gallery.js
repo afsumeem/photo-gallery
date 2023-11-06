@@ -117,11 +117,7 @@ const Gallery = () => {
                                   className="img-div"
                                   onClick={() => handleCheckboxToggle(image.id)}
                                 >
-                                  <img
-                                    src={image.image}
-                                    className="image"
-                                    alt="gallery-img"
-                                  />
+                                  <img src={image.image} alt="gallery-img" />
 
                                   <input
                                     type="checkbox"
