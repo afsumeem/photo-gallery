@@ -58,10 +58,21 @@ body{
 .delete-img{
     color: red;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 25px;
     background-color: transparent;
     border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ff1010;
+    height: 50px;
+    width: 50px;
+    transition: .5s;
 }
+
+  .delete-img:hover {
+    box-shadow: 0 0 25px #ff1010;
+  }
+  
+
 .delete-img:disabled{
 cursor: no-drop;
 }
